@@ -1,6 +1,7 @@
 // App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import AudioPlayer from './components/audioPlayer';
 
 const App = () => {
   const [questions, setQuestions] = useState([]);
@@ -13,7 +14,7 @@ const App = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const questionData = require('./questions.json');
+        const questionData = require('./questions-audio.json');
         const localStoragePlayedQuestions = localStorage.getItem('playedQuestions');
         const playedQuestions = localStoragePlayedQuestions ? JSON.parse(localStoragePlayedQuestions) : [];
         let filteredQuestionData = questionData;
@@ -97,11 +98,13 @@ const App = () => {
     case "playing":
       content = (<div className="question-container">
         <h1 className="app-title">Trivia Game</h1>
+        <p className="question-number">Question Number {displayQuestion ? answeredQuestions.length : answeredQuestions.length+1}</p>
         <p className="question-number">Category: {currentQuestion.category}</p>
         {(displayQuestion ? 
           (<>
             <p className="question-text">{currentQuestion.question}</p>
             {(currentQuestion.img !== "N/A") ? <img className="question-image" src={"./images/"+currentQuestion.img} alt="Question Image" /> : null}
+            {(currentQuestion.audio !== "N/A") ? <AudioPlayer currentQuestion={currentQuestion} /> : null}
           </>)
           : null)}
         {(displayAnswer ? <p className="answer-text">{currentQuestion.answer}</p> : null)}
