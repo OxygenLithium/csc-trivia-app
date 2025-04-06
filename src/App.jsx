@@ -9,6 +9,7 @@ const App = () => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [questionNumber, setQuestionNumber] = useState(answeredQuestions.length+1);
   const [gameState, setGameState] = useState("welcome");
   const [displayQuestion, setDisplayQuestion] = useState(false);
   const [displayAnswer, setDisplayAnswer] = useState(false);
@@ -53,6 +54,10 @@ const App = () => {
       setCurrentQuestion(randomQuestion);
     }
   };
+
+  const updateQuestionNumber = () => {
+    setQuestionNumber(answeredQuestions.length+1);
+  }
 
   const removeQuestion = () => {
     setDisplayQuestion(true);
@@ -100,9 +105,10 @@ const App = () => {
       content = (<div className="question-container">
         <div className="absolute right-10 top-10" style={{fontSize:"12px"}}>
           <h1>{`Question ID: ${currentQuestion.id}`}</h1>
+          <h1>{`${questionNumber}/${questions.length}`}</h1>
         </div>
         <h1 className="app-title">CSC Trivia Night</h1>
-        <p className="question-number">Question Number {displayQuestion ? answeredQuestions.length : answeredQuestions.length+1}</p>
+        <p className="question-number">Question Number {questionNumber}</p>
         <p className="category">Category: {currentQuestion.category}</p>
         {(displayQuestion ? 
           (<div className="flex flex-col items-center w-full">
@@ -114,7 +120,8 @@ const App = () => {
           : null)}
         {(displayAnswer ? <p className="answer-text">{currentQuestion.answer}</p> : null)}
         <br />
-        {(displayAnswer ? <button className="next-button" onClick={getRandomQuestion}>Next Question</button> :
+        {(displayAnswer ? <button className="next-button"
+          onClick={() => { getRandomQuestion(); updateQuestionNumber()}}>Next Question</button> :
           (displayQuestion ? <button className="next-button" onClick={() => setDisplayAnswer(true)}>Show Answer</button> :
             <button className="next-button" onClick={() => removeQuestion()}>Show Question</button>))}
       </div>);
