@@ -112,13 +112,12 @@ const App = () => {
         {(displayAnswer ? <button className="next-button" onClick={getRandomQuestion}>Next Question</button> :
           (displayQuestion ? <button className="next-button" onClick={() => setDisplayAnswer(true)}>Show Answer</button> :
             <button className="next-button" onClick={() => removeQuestion()}>Show Question</button>))}
-
       </div>);
       break;
 
     case "gameOver":
       content = (<div className="welcome">
-        <h2 className="category">Out of Questions!</h2>
+        <h2 className="out-of-questions">Out of Questions!</h2>
         <button className="play-again-button" onClick={resetGame}>
           Reset Pool?
         </button>
@@ -127,8 +126,22 @@ const App = () => {
   }
 
   return (
-    <div className={`app bg-red-500`}>
+    <div className="app relative">
       {content}
+      <div className="absolute left-10 bottom-10">
+        <img
+          src="../src/app-images/csc-logo.png"
+          width="100"
+          alt="CSC Logo"
+        />
+      </div>
+      <div className="absolute right-0 bottom-2">
+        <img
+          src="../src/app-images/codey.png"
+          width="160"
+          alt="Codey"
+        />
+      </div>
     </div>
   );
 };

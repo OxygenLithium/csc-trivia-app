@@ -5,7 +5,7 @@ Now supports audio files.
 
 In order to use this, simply follow the prescribed JSON format below and modify the questions.json file as required.
 
-Images should be placed in the ./public/images/ folder, and audio in the ./public/images/ folder. They can be named by just their name in the JSON, as it will pull from these folders.
+Images should be placed in the ./public/images/ folder, and audio in the ./public/audio/ folder. They can be named by just their name in the JSON, as it will pull from these folders.
 
 JSON Format Example: 
 ```
