@@ -18,3 +18,53 @@ JSON Format Example:
   {"id": 6, "question": "Which operating system's startup sound is this? ", "answer": "Windows XP", "category": "Operating Systems ", "img": "N/A", "audio": "windowsXP.mp3"},
 ]
 ```
+
+Consult W25 Trivia Document for how the Google Sheet should be formatted.
+The following script should be inserted into the App Script in the Google Sheet.
+```
+function generateJSON() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getActiveSheet();
+  var data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 6).getValues();
+
+  var jsonArray = [];
+  for (var i = 0; i < 325; i++) {
+    var id = i + 1;
+    var question = data[i][0];
+    var answer = data[i][1];
+    var category = data[i][2];
+    var img = data[i][3] === "" ? "N/A" : data[i][3];
+    var audio = data[i][4] === "" ? "N/A" : data[i][4];
+    var video = data[i][5] === "" ? "N/A" : data[i][5];
+    Logger.log(answer);
+    Logger.log(category)
+    Logger.log(img)
+    Logger.log(audio)
+    Logger.log(video)
+    
+    var jsonObject = {
+      "id": id,
+      "question": question,
+      "answer": answer,
+      "category": category,
+      "img": img,
+      "audio": audio,
+      "video": video
+    };
+    jsonArray.push(jsonObject);
+  }
+  
+  var jsonString = JSON.stringify(jsonArray, null, 2);
+  
+  // Create a new sheet tab
+  var newSheet = spreadsheet.insertSheet("JSON Data");
+
+  var jsonChunks = jsonString.match(/(.|[\r\n]){1,50000}/g);
+  for (var j = 0; j < jsonChunks.length; j++) {
+    newSheet.getRange(j + 1, 1).setValue(jsonChunks[j]);
+  }
+
+  Logger.log("JSON data written to sheet.");
+}
+```
+
