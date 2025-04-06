@@ -98,6 +98,9 @@ const App = () => {
 
     case "playing":
       content = (<div className="question-container">
+        <div className="absolute right-10 top-10" style={{fontSize:"12px"}}>
+          <h1>{`Question ID: ${currentQuestion.id}`}</h1>
+        </div>
         <h1 className="app-title">CSC Trivia Night</h1>
         <p className="question-number">Question Number {displayQuestion ? answeredQuestions.length : answeredQuestions.length+1}</p>
         <p className="category">Category: {currentQuestion.category}</p>
