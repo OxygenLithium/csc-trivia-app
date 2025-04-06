@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import AudioPlayer from './components/audioPlayer';
+import VideoPlayer from './components/videoPlayer';
 import questionData from './questions-audio.json';
 
 const App = () => {
@@ -105,6 +106,7 @@ const App = () => {
             <p className="question-text">{currentQuestion.question}</p>
             {(currentQuestion.img !== "N/A") ? <img className="question-image" src={"./images/"+currentQuestion.img} alt="Question Image" /> : null}
             {(currentQuestion.audio !== "N/A") ? <AudioPlayer class="mx-auto" currentQuestion={currentQuestion} /> : null}
+            {(currentQuestion.video !== "N/A") ? <VideoPlayer class="mx-auto" currentQuestion={currentQuestion} /> : null}
           </div>)
           : null)}
         {(displayAnswer ? <p className="answer-text">{currentQuestion.answer}</p> : null)}
