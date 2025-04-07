@@ -5,7 +5,7 @@ Now supports audio files.
 
 In order to use this, simply follow the prescribed JSON format below and modify the questions.json file as required.
 
-Images should be placed in the ./public/images/ folder, and audio in the ./public/audio/ folder. They can be named by just their name in the JSON, as it will pull from these folders.
+Images should be placed in the ./public/images/ folder, audio in the ./public/audio/ folder, and videos in the ./public/video/ folder. They should be named by just their file name in the JSON, as it will pull from these folders.
 
 JSON Format Example: 
 ```
@@ -68,3 +68,13 @@ function generateJSON() {
 }
 ```
 
+Set up steps for users unfamiliar with React:
+1. Download this project and unzip it
+2. Place the files for questions with images, audio, or videos in their corresponding folders. Ensure that the corresponding cells in the Google Sheet have the filename of these files in the correct column.
+3. In the Google Sheet containing the trivia questions, go to  `Extensions->App Script` and paste the above script. Then run the code.
+4. Copy the generated JSON file into the `./src/questions.json` file. Ensure that it is properly JSON formatted (VSCode should show errors if it isn't).
+5. In the terminal, `cd` into the folder for this project
+6. Enter `npm i` into the console
+7. Enter `npm run start`
+8. The console will display a URL in the form `http://localhost:XXXX/`. Go to this URL in your local browser.
+9. Ensure the questions are displaying properly. It is possible that the Google Sheet was formatted incorrectly and you don't want to find out during the event.

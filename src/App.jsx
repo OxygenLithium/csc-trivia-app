@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import AudioPlayer from './components/audioPlayer';
 import VideoPlayer from './components/videoPlayer';
-import questionData from './questions-audio.json';
+import questionData from './questions.json';
 
 const App = () => {
   const [questions, setQuestions] = useState([]);
